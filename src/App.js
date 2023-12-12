@@ -1,8 +1,8 @@
 
 import './App.css';
+import 'bulma/css/bulma.min.css';
 import NavBar from './components/NavBar/NavBar';
 import ItemListContainer from './components/ItemListContainer/ItemListContainer.js';
-import 'bulma/css/bulma.min.css';
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer.js'
 
 function App() {
