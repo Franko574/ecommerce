@@ -18,12 +18,13 @@ const ItemDetailContainer = () => {
                 console.error(error)
             })
     },[itemId])
+    
+    return (
+        <div className='ItemDetailContainer'>
+            <ItemDetail {...product} /> 
+        </div>
+    )
 }
 
-return (
-    <div className='ItemDetailContainer'>
-        <ItemDetail {...product} /> 
-    </div>
-)
 
 export default ItemDetailContainer 
