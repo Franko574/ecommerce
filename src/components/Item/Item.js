@@ -1,23 +1,22 @@
 import "./Item.css";
 import { useEffect, useState } from "react";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 const Producto = () => {
   const [producto, setProducto] = useState({});
+  const {id}= useParams();
 
   useEffect(() => {
     const db = getFirestore();
-    
-    const product = doc(db, "productos", "8sTF8n2HCyOlg9Vhcj0J");
-    
+    const product = doc(db, "productos",id);
     getDoc(product).then((snapshot) => {
       if (snapshot.exists()) {
         setProducto({id:snapshot.id, ...snapshot.data()});
       }
     });
-  }, []);
-
+  });
+ 
 
   return (
     <div clasName="Container">
