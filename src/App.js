@@ -8,6 +8,7 @@ import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailCont
 import Cart from './components/Cart/Cart';
 import { CartProvider } from './components/Context/CartContext.js';
 import Producto from './components/Item/Item';
+import {db} from "./components/Configuracion/firebase"
 
 function App() {
   return (
