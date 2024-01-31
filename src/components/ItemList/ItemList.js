@@ -1,6 +1,19 @@
 import './ItemList.css'
-/* import Item from '../Item/Item' */ 
-import { getFirestore, collection , getDocs } from 'firebase/firestore'
+import Item from '../Item/Item'
+
+const ItemList = ({ products }) => {
+    return (
+        <div className="ListGroup">
+            {products.map(prod => <Item key={prod.id}{...prod}/>)}
+        </div>
+    )
+
+}
+
+export default ItemList
+
+
+/* import { getFirestore, collection , getDocs } from 'firebase/firestore' -------------------------------------------------------------------------------------------
 import { useEffect , useState} from 'react';
 import {Link} from "react-router-dom"
 
@@ -34,9 +47,9 @@ const Productos = () => {
     )
 
 }
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 export default Productos;
-
+ */
 
 /* const ItemList = ({products}) => {
     return (

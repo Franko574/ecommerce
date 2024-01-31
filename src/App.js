@@ -8,7 +8,7 @@ import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailCont
 import Cart from './components/Cart/Cart';
 import { CartProvider } from './components/Context/CartContext.js';
 import Producto from './components/Item/Item';
-import {db} from "./components/Configuracion/firebase"
+import Checkout from './components/CheckOut/CheckOut.js';
 
 function App() {
   return (
@@ -18,11 +18,12 @@ function App() {
           <NavBar />
           <Routes>
             <Route path='/' element = {<ItemListContainer/>} />
-            <Route path='/category/;categoryId' element = {<ItemListContainer/>} />
+            <Route path='/category/:categoryId' element = {<ItemListContainer/>} />
             <Route path='/item/:itemId' element = {<ItemDetailContainer/>} />
             <Route path='/cart' element= {<Cart/>}/>
             <Route path='*' element = {<h1>404 NOT FOUND</h1>} />
             <Route path='/producto/:id' element = {<Producto/>}/>
+            <Route path='/checkout' element={<Checkout/>} />
           </Routes>
         </CartProvider>
       </BrowserRouter>
