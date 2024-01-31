@@ -1,32 +1,29 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useEffect, useState } from 'react'
 
 export const CartContext = createContext({
-    cart: [],
-    totalQuantity: 0,
+    cart: []
 });
 
+const initialCart = JSON.parse(localStorage.getItem("cart")) || [];
+
 export const CartProvider = ({ children }) => {
-    const [cart, setCart] = useState([])
-    const [totalQuantity, setTotalQuantity] = useState(0)
-
-    useEffect(() => {
-        
-        const newTotalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
-        setTotalQuantity(newTotalQuantity);
-    }, [cart]);
-
-
+    const [cart, setCart] = useState(initialCart);
+    
     const addItem = (item, quantity) => {
         if (!isInCart(item.id)) {
-            setCart(prev => [...prev, { ...item, quantity }])
+            setCart (prev => [...prev, {...item, quantity}])
         } else {
-            console.error('El producto ya fue agregado')
+            setCart(prev =>
+                prev.map(prod =>
+                    prod.id === item.id ? {...prod, quantity: quantity} : prod
+                )
+            );
         }
     }
 
     const removeItem = (itemId) => {
-        const cartUpdated = cart.filter(prod => prod.id !== itemId)
-        setCart(cartUpdated)
+        const cartUpdate = cart.filter(prod => prod.id !== itemId)
+        setCart(cartUpdate)
     }
 
     const clearCart = () => {
@@ -34,27 +31,41 @@ export const CartProvider = ({ children }) => {
     }
 
     const isInCart = (itemId) => {
-        return cart.some(prod => prod.id === itemId)
+        return cart.some(prod => prod.id === itemId);
     }
 
-    const calculateTotal = () => {
-        // Sumar los precios de los productos en el carrito
-        const total = cart.reduce((acc, item) => {
-            return acc + item.price * item.quantity;
-        }, 0);
+    const totalQuantity = () => {
+        return cart.reduce((acc, prod) => acc + prod.quantity, 0);
+    }
 
-        return total;
+    const total = () => {
+        return cart.reduce((acc, prod) => acc + prod.quantity * prod.price, 0);
+    }
+
+    const updateQuantity = (itemId, newQuantity) => {
+        const updatedCart = cart.map(prod => 
+            prod.id === itemId ? {...prod, quantity: newQuantity} : prod
+        );
+        setCart(updatedCart);
     };
 
-    const total = parseInt(calculateTotal());
-    console.log(totalQuantity)
-    return (
-        <CartContext.Provider value={{ cart, addItem, removeItem, clearCart, total, totalQuantity }}>
-            {children}
-        </CartContext.Provider>
-    )
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cart))
+    }, [cart]);
+
+    const formatMoney = (conversion) => {
+        return new Intl.NumberFormat('es-AR', {
+            style: 'currency',
+            currency: 'ARS'
+        }).format(conversion);
     }
 
+    return (
+        <CartContext.Provider value={{ cart, addItem, removeItem, clearCart, totalQuantity, total, updateQuantity, formatMoney }}>
+            { children }
+        </CartContext.Provider>
+    )
+}
 
 
 

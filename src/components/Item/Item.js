@@ -4,9 +4,60 @@ import { Link } from "react-router-dom"
 const Item = ({ id, name, img, price, stock }) => {
 
     return (
-
         <article>
-            <header className="Header">
+            {/* Imagen grande */}
+            <div class="card">
+                <div class="card-image">
+                    <figure class="image is-4by3">
+                      <img src={img} alt={name} className="ItemImg" />
+                    </figure>
+                </div>
+
+              {/* Imagen Chica */}
+              <div class="card-content">
+                  <div class="media">
+                    <div class="media-left">
+                      <figure class="image is-48x48">
+                        <img src="https://ams3.digitaloceanspaces.com/graffica/2022/12/unnamed-512x375.png" className="ItemImg" />
+                      </figure>
+                    </div>
+                    
+                    {/* Titulos */}
+                    <div class="media-content">
+                      <h2 className="ItemHeader">
+                        {name}
+                      </h2>
+                    </div>
+                  </div>
+                  
+                {/* Contenido Imagen */}
+                <div class="content">
+                  <section>
+                      <p className="Info">
+                          Precio: $ {price}
+                      </p>
+                      <p className="Info">
+                          Stock disponible: {stock}
+                      </p>
+                  </section>
+                  <footer className="ItemFooter card-footer">
+                      <Link to={`/item/${id}`} className='Cart'>
+                        <button className="button is-primary">Ver detalles</button>
+                      </Link>
+                  </footer>
+                </div>
+              </div>
+            </div>
+
+        </article>
+    )
+}
+
+export default Item
+
+
+            {/* Card Vieja */}
+/*             <header className="Header">
                 <h2 className="ItemHeader">
                     {name}
                 </h2>
@@ -26,76 +77,4 @@ const Item = ({ id, name, img, price, stock }) => {
                 <footer className="ItemFooter card-footer">
                     <Link to={`/item/${id}`} className="button is-small detalle">Ver detalles</Link>
                 </footer>
-            </div>
-        </article>
-    )
-}
-
-export default Item
-
-
-
-
-
-
-/* import { useEffect, useState } from "react";---------------------------------------------------------------------------------------------------------------------------------------
-import { getFirestore, doc, getDoc } from "firebase/firestore";
-import { useParams } from 'react-router-dom';
-
-const Producto = () => {
-  const [producto, setProducto] = useState({});
-  const {id}= useParams();
-
-  useEffect(() => {
-    const db = getFirestore();
-    const product = doc(db, "productos",id);
-    getDoc(product).then((snapshot) => {
-      if (snapshot.exists()) {
-        setProducto({id:snapshot.id, ...snapshot.data()});
-      }
-    });
-  });
- 
-
-  return (
-    <div clasName="Container">
-      <div className="row">
-        <div>
-          <img src={producto.imagen} alt={producto.titulo} />
-        </div>
-        <div>
-          <h1>{producto.titulo}</h1>
-          <h5>{producto.calorias}</h5>
-          <p>{producto.descripcion}</p>
-          <p><b>{producto.precio}</b></p>
-        </div>
-
-      </div>
-      
-    </div>
-  )
-};
- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/* const Item = ({ id, name, img, price, stock }) => {
-  return (
-    <article className="CardItem">
-      <header className="Header">
-        <h2 clasName="ItemHeader">{producto.titulo}</h2>
-      </header>
-      <picture>
-        <img src={img} alt={name} className="ItemImg" />
-      </picture>
-      <section>
-        <p className="Info">Precio: $ {price}</p>
-        <p className="Info">Stock disponible: $ {stock}</p>
-      </section>
-      <footer class="ItemFooter">
-        <Link to={`/item/${id}`} className="option">
-          ver detalle
-        </Link>
-      </footer>
-    </article>
-  );
-}; */
-
-/* export default Producto; */
+            </div> */

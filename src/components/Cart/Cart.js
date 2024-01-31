@@ -1,4 +1,4 @@
-/* import './Cart.css' */
+import './Cart.css'
 import {useContext} from 'react'
 import {CartContext} from '../Context/CartContext'
 import CartItem from '../Item/Item'
@@ -17,16 +17,20 @@ const Cart = () => {
     }
 
     return (
-        <div>
-            {cart.map (p=> <CartItem key={p.id}{...p}/>)}
-            <h3>Total:$ {total} </h3>
-            <button onClick={() =>clearCart()} className="Button">Limpiar carrito</button>
-            <div>
-                <Link to='/checkout' className='Checkout'>
-                        <button className='CheckOut'> 
-                            Finalizar Compra
-                        </button>
-                </Link>
+        <div className='Ca'>
+            <div className='C1'>
+                {cart.map (p=> <CartItem key={p.id} {...p}/>)}
+            </div>
+            <div className='C2'>
+                <h3>Total:$ {total} </h3>
+                <button className="button is-primary" onClick={() =>clearCart()} >Limpiar carrito</button>
+                <div>
+                    <Link to='/checkout'>
+                            <button className="button is-primary"> 
+                                Finalizar Compra
+                            </button>
+                    </Link>
+                </div>
             </div>
         </div>
     )
