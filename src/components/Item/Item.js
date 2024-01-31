@@ -18,7 +18,7 @@ const Item = ({ id, name, img, price, stock }) => {
                   <div class="media">
                     <div class="media-left">
                       <figure class="image is-48x48">
-                        <img src="https://ams3.digitaloceanspaces.com/graffica/2022/12/unnamed-512x375.png" className="ItemImg" />
+                        <img src="https://ams3.digitaloceanspaces.com/graffica/2022/12/unnamed-512x375.png" className="ItemImg" alt="het"/>
                       </figure>
                     </div>
                     
@@ -56,7 +56,7 @@ const Item = ({ id, name, img, price, stock }) => {
 export default Item
 
 
-            {/* Card Vieja */}
+            /* Card Vieja */
 /*             <header className="Header">
                 <h2 className="ItemHeader">
                     {name}
